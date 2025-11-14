@@ -26,6 +26,8 @@ func Run(stage stages.Stage) {
 	rl.SetConfigFlags(rl.FlagWindowResizable | rl.FlagVsyncHint)
 	rl.InitWindow(1280, 720, "Scratch")
 
+	globalRunner.stage.Setup()
+
 	for !(globalRunner.shouldExit || rl.WindowShouldClose()) {
 		rl.BeginDrawing()
 		rl.ClearScreenBuffers()
@@ -33,6 +35,8 @@ func Run(stage stages.Stage) {
 		globalRunner.stage.Draw(delta)
 		rl.EndDrawing()
 	}
+
+	globalRunner.stage.End()
 
 	rl.CloseWindow()
 }
